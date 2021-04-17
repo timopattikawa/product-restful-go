@@ -1,0 +1,7 @@
+app: mtp-product-restful
+
+mysqlDB: 
+  connection: "root:@tcp(127.0.0.1:3306)/sales"
+
+server:
+  port: 9000
