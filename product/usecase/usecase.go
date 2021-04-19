@@ -9,4 +9,5 @@ type UseCaseProduct interface {
 	GetAllDataProduct() (*[]domain.Product, error)
 	GetOneProductByID(productID int64) (*domain.Product, error)
 	CreateProduct(productRequest model.ProductRequest) (int, error)
+	DeleteProductByID(productID int64) (int, error)
 }

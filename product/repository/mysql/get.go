@@ -68,7 +68,6 @@ func (mp *mysqlProduct) GetProductByName(productName string) (*domain.Product, e
 }
 
 func (mp *mysqlProduct) CreateProduct(product domain.Product) error {
-	log.Printf("Save %v to Database", product)
 	stmt, err := mp.dbCon.Prepare("INSERT INTO products VALUES (NULL, ?, ?, ?)")
 
 	if err != nil {
@@ -78,5 +77,16 @@ func (mp *mysqlProduct) CreateProduct(product domain.Product) error {
 
 	stmt.Exec(product.ProductName, product.Price, product.Quantity)
 
+	return nil
+}
+
+func (mp *mysqlProduct) DeleteProductByID(productID int64) error {
+	stmt, err := mp.dbCon.Prepare("DELETE FROM products WHERE product_id = ?")
+	if err != nil {
+		log.Println("[REPOSITORY] fail to prepare statement")
+		return err
+	}
+
+	stmt.Exec(productID)
 	return nil
 }

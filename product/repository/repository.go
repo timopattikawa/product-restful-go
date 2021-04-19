@@ -7,4 +7,5 @@ type RepositoryProduct interface {
 	GetProductByID(productID int64) (*d.Product, error)
 	GetProductByName(productName string) (*d.Product, error)
 	CreateProduct(product d.Product) error
+	DeleteProductByID(productID int64) error
 }

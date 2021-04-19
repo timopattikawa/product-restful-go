@@ -63,3 +63,21 @@ func (usp *UseCaseProductImpl) CreateProduct(productRequest model.ProductRequest
 
 	return http.StatusCreated, err
 }
+
+func (usp *UseCaseProductImpl) DeleteProductByID(productID int64) (int, error) {
+	log.Println("[USECASE] Delete product")
+
+	productCheck, err := usp.RepositoryProduct.GetProductByID(productID)
+	if productCheck == nil && err != nil {
+		log.Println("user not found for delete")
+		return http.StatusNotFound, err
+	}
+
+	err = usp.RepositoryProduct.DeleteProductByID(productID)
+	if err != nil {
+		log.Println("fail to delete")
+		return http.StatusInternalServerError, err
+	}
+
+	return http.StatusOK, nil
+}
